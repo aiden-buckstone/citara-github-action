@@ -13,4 +13,4 @@ export const RETRY_BACKOFF_MS = 3_000;
 /** Wait when a 429 carries no usable Retry-After header. */
 export const DEFAULT_RETRY_AFTER_MS = 5_000;
 
-export const USER_AGENT = "llm-ready-action/1";
+export const USER_AGENT = "citara-github-action/1";

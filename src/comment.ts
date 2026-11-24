@@ -76,7 +76,7 @@ function headers(token: string): Record<string, string> {
     accept: "application/vnd.github+json",
     authorization: `Bearer ${token}`,
     "content-type": "application/json",
-    "user-agent": "llm-ready-action",
+    "user-agent": "citara-github-action",
     "x-github-api-version": "2022-11-28",
   };
 }

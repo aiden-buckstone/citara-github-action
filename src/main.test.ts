@@ -178,7 +178,7 @@ describe("run: failed gate", () => {
     expect(core.setOutput).toHaveBeenCalledWith("passed", "false");
     expect(calls.some((c) => c.method === "POST" && c.url.includes("/comments"))).toBe(true);
     expect(core.setFailed).toHaveBeenCalledWith(
-      "LLM Ready gate failed: score 60 < 75, grade D < B",
+      "Citara gate failed: score 60 < 75, grade D < B",
     );
   });
 

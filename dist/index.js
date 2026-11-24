@@ -19827,7 +19827,7 @@ var REQUEST_TIMEOUT_MS = 12e4;
 var MAX_RETRY_AFTER_MS = 6e4;
 var RETRY_BACKOFF_MS = 3e3;
 var DEFAULT_RETRY_AFTER_MS = 5e3;
-var USER_AGENT = "llm-ready-action/1";
+var USER_AGENT = "citara-github-action/1";
 
 // src/api.ts
 var ApiError = class extends Error {
@@ -19935,7 +19935,7 @@ async function requestScan(inputs, deps = {}) {
 function describeApiError(error, serverUrl) {
   switch (error.code) {
     case "unauthorized":
-      return `LLM Ready API key invalid, expired or revoked. Create one at ${serverUrl}/account/api-keys and store it as a secret.`;
+      return `Citara API key invalid, expired or revoked. Create one at ${serverUrl}/account/api-keys and store it as a secret.`;
     case "domain_limit_reached":
       return `${error.message} Upgrade here: ${error.upgradeUrl ?? `${serverUrl}/account`}`;
     case "invalid_request":
@@ -19998,7 +19998,7 @@ function headers(token) {
     accept: "application/vnd.github+json",
     authorization: `Bearer ${token}`,
     "content-type": "application/json",
-    "user-agent": "llm-ready-action",
+    "user-agent": "citara-github-action",
     "x-github-api-version": "2022-11-28"
   };
 }
@@ -20194,7 +20194,7 @@ function gateMessage(result) {
   const misses = [];
   if (gate && !gate.scorePassed) misses.push(`score ${result.score} < ${gate.minScore}`);
   if (gate && !gate.gradePassed) misses.push(`grade ${result.grade} < ${gate.minGrade}`);
-  return `LLM Ready gate failed: ${misses.join(", ") || `score ${result.score}, grade ${result.grade}, threshold missed`}`;
+  return `Citara gate failed: ${misses.join(", ") || `score ${result.score}, grade ${result.grade}, threshold missed`}`;
 }
 async function run(deps = {}) {
   const get = deps.getInput ?? ((name) => core2.getInput(name));
@@ -20206,7 +20206,7 @@ async function run(deps = {}) {
     if (!apiKey) {
       if (isForkPullRequest(env)) {
         core2.warning(
-          "No LLM Ready API key is available. Secrets are not shared with pull requests from forks, so the audit was skipped."
+          "No Citara API key is available. Secrets are not shared with pull requests from forks, so the audit was skipped."
         );
         return;
       }
@@ -20247,7 +20247,7 @@ async function run(deps = {}) {
       core2.setFailed(gateMessage(result));
       return;
     }
-    core2.info("LLM Ready gate passed.");
+    core2.info("Citara gate passed.");
   } catch (error) {
     if (error instanceof ActionInputError) {
       core2.setOutput("passed", "false");
@@ -20255,7 +20255,7 @@ async function run(deps = {}) {
       return;
     }
     const message = error instanceof Error ? error.message : String(error);
-    failOrWarn(failOnError, `LLM Ready action failed: ${message}`);
+    failOrWarn(failOnError, `Citara action failed: ${message}`);
   }
 }
 

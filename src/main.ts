@@ -59,7 +59,7 @@ function gateMessage(result: ScanResponse): string {
   const misses: string[] = [];
   if (gate && !gate.scorePassed) misses.push(`score ${result.score} < ${gate.minScore}`);
   if (gate && !gate.gradePassed) misses.push(`grade ${result.grade} < ${gate.minGrade}`);
-  return `LLM Ready gate failed: ${misses.join(", ") || `score ${result.score}, grade ${result.grade}, threshold missed`}`;
+  return `Citara gate failed: ${misses.join(", ") || `score ${result.score}, grade ${result.grade}, threshold missed`}`;
 }
 
 export async function run(deps: RunDeps = {}): Promise<void> {
@@ -75,7 +75,7 @@ export async function run(deps: RunDeps = {}): Promise<void> {
     if (!apiKey) {
       if (isForkPullRequest(env)) {
         core.warning(
-          "No LLM Ready API key is available. Secrets are not shared with pull requests from forks, so the audit was skipped.",
+          "No Citara API key is available. Secrets are not shared with pull requests from forks, so the audit was skipped.",
         );
         return;
       }
@@ -123,7 +123,7 @@ export async function run(deps: RunDeps = {}): Promise<void> {
       core.setFailed(gateMessage(result));
       return;
     }
-    core.info("LLM Ready gate passed.");
+    core.info("Citara gate passed.");
   } catch (error) {
     if (error instanceof ActionInputError) {
       core.setOutput("passed", "false");
@@ -131,6 +131,6 @@ export async function run(deps: RunDeps = {}): Promise<void> {
       return;
     }
     const message = error instanceof Error ? error.message : String(error);
-    failOrWarn(failOnError, `LLM Ready action failed: ${message}`);
+    failOrWarn(failOnError, `Citara action failed: ${message}`);
   }
 }

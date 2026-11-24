@@ -147,7 +147,7 @@ describe("describeApiError", () => {
   const e = (code: string, extra?: string) => new ApiError("server said", 400, code, extra);
   it("maps 401", () => {
     expect(describeApiError(e("unauthorized"), "https://scan.test")).toBe(
-      "LLM Ready API key invalid, expired or revoked. Create one at https://scan.test/account/api-keys and store it as a secret.",
+      "Citara API key invalid, expired or revoked. Create one at https://scan.test/account/api-keys and store it as a secret.",
     );
   });
   it("includes the upgrade url for 403", () => {

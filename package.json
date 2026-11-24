@@ -1,8 +1,8 @@
 {
-  "name": "llm-ready-action",
+  "name": "citara-github-action",
   "version": "1.0.0",
   "private": true,
-  "description": "GitHub Action that audits a deployed site through the LLM Ready scan API and gates pull requests on the result.",
+  "description": "GitHub Action that audits a deployed site through the Citara scan API and gates pull requests on the result.",
   "license": "MIT",
   "engines": {
     "node": ">=24"
@@ -27,6 +27,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ABradwell/llm-ready-action.git"
+    "url": "https://github.com/aiden-buckstone/citara-github-action.git"
   }
 }

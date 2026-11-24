@@ -1,6 +1,6 @@
-name: "LLM Ready Audit"
-description: "Audit a deployed site's /llms.txt, crawler access, static parseability and schema.org interfaces through the LLM Ready scan API. Post a pull request report and fail the job when the score or grade misses its threshold."
-author: "ABradwell"
+name: "Citara Audit"
+description: "Audit a deployed site's /llms.txt, crawler access, static parseability and schema.org interfaces through the Citara scan API. Post a pull request report and fail the job when the score or grade misses its threshold."
+author: "aiden-buckstone"
 branding:
   icon: "search"
   color: "purple"
