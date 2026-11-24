@@ -1,0 +1,32 @@
+{
+  "name": "llm-ready-action",
+  "version": "1.0.0",
+  "private": true,
+  "description": "GitHub Action that audits a deployed site through the LLM Ready scan API and gates pull requests on the result.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24"
+  },
+  "packageManager": "pnpm@10.32.1",
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "check-dist": "pnpm build && git diff --exit-code -- dist"
+  },
+  "dependencies": {
+    "@actions/core": "^1.11.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "conventional-changelog-conventionalcommits": "^9.3.1",
+    "semantic-release": "25.0.9",
+    "tsup": "^8.3.5",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ABradwell/llm-ready-action.git"
+  }
+}

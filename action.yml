@@ -1,0 +1,85 @@
+name: "LLM Ready Audit"
+description: "Audit a deployed site's /llms.txt, crawler access, static parseability and schema.org interfaces through the LLM Ready scan API. Post a pull request report and fail the job when the score or grade misses its threshold."
+author: "ABradwell"
+branding:
+  icon: "search"
+  color: "purple"
+
+inputs:
+  api-key:
+    description: "Organization API key for the scan service. Store it as a repository secret (for example LLMSEO_API_KEY)."
+    required: true
+  url:
+    description: "Target URL to audit, e.g. https://preview.example.com"
+    required: true
+  server-url:
+    description: "Base URL of the scan service."
+    required: false
+    # TODO(owner): set production URL (keep in sync with DEFAULT_SERVER_URL in src/config.ts)
+    default: "https://TODO-set-production-url.example"
+  min-score:
+    description: "Minimum composite score (0-100) required to pass"
+    required: false
+    default: "75"
+  min-grade:
+    description: "Minimum letter grade (A, B, C, D or F) required to pass"
+    required: false
+    default: "B"
+  site-type:
+    description: "Force a site profile: auto, saas, portfolio, docs, ecommerce, local-business or blog-media"
+    required: false
+    default: "auto"
+  scope:
+    description: "Audit the whole site (site) or only the given page (page). Leave empty for the service default."
+    required: false
+    default: ""
+  comment-on-pr:
+    description: "Post or update a sticky audit report on the pull request"
+    required: false
+    default: "true"
+  github-token:
+    description: "Token used to write the pull request comment"
+    required: false
+    default: ${{ github.token }}
+  timeout:
+    description: "Per-request timeout in milliseconds used by the audit for each fetch (1000-15000)"
+    required: false
+    default: "10000"
+  report-style:
+    description: "Pull request report style: technical (full check matrix) or plain (plain-language change requests for non-technical readers)"
+    required: false
+    default: "technical"
+  resolve-links:
+    description: "Verify llms.txt links with HEAD requests (at most six, under a four-second budget)"
+    required: false
+    default: "true"
+  agent-fetch:
+    description: "Compare a live fetch as GPTBot and OAI-SearchBot to expose firewall blocks"
+    required: false
+    default: "true"
+  headers:
+    description: "Optional request headers sent to the audited site, one Name: value per line. Use for protected previews and staging hosts."
+    required: false
+    default: ""
+  fail-on-error:
+    description: "Fail the job on API or network errors. Set to false to only warn (a missed score threshold still fails)."
+    required: false
+    default: "true"
+
+outputs:
+  score:
+    description: "Composite AI compatibility score (0-100)"
+  grade:
+    description: "Composite letter grade (A-F)"
+  passed:
+    description: "Whether the score and grade met the configured thresholds"
+  report-url:
+    description: "Link to the full report in the web app"
+  scan-id:
+    description: "Identifier of the recorded scan"
+  report-json:
+    description: "JSON-serialized audit report"
+
+runs:
+  using: "node24"
+  main: "dist/index.js"
