@@ -162,7 +162,7 @@ export async function requestScan(
 export function describeApiError(error: ApiError, serverUrl: string): string {
   switch (error.code) {
     case "unauthorized":
-      return `LLM Ready API key invalid, expired or revoked. Create one at ${serverUrl}/account/api-keys and store it as a secret.`;
+      return `Citara API key invalid, expired or revoked. Create one at ${serverUrl}/account/api-keys and store it as a secret.`;
     case "domain_limit_reached":
       return `${error.message} Upgrade here: ${error.upgradeUrl ?? `${serverUrl}/account`}`;
     case "invalid_request":

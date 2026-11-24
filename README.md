@@ -1,8 +1,8 @@
-# LLM Ready Audit
+# Citara Audit
 
 A GitHub Action that audits a deployed site for AI discoverability (`/llms.txt`, crawler access, static parseability, schema.org) and gates your pull requests on the result.
 
-It is a thin client of the LLM Ready scan API, in the same way SonarQube scanners use `SONAR_TOKEN`. The action sends your organization API key and a URL. The service runs the audit and returns the verdict plus a ready-made markdown report. The action contains no audit engine.
+It is a thin client of the Citara scan API, in the same way SonarQube scanners use `SONAR_TOKEN`. The action sends your organization API key and a URL. The service runs the audit and returns the verdict plus a ready-made markdown report. The action contains no audit engine.
 
 ## Quick start
 
@@ -11,7 +11,7 @@ It is a thin client of the LLM Ready scan API, in the same way SonarQube scanner
 3. Add a workflow:
 
 ```yaml
-name: LLM Ready
+name: Citara
 on:
   pull_request:
 
@@ -23,7 +23,7 @@ jobs:
   audit:
     runs-on: ubuntu-latest
     steps:
-      - uses: ABradwell/llm-ready-action@v1
+      - uses: aiden-buckstone/citara-github-action@v1
         with:
           api-key: ${{ secrets.LLMSEO_API_KEY }}
           url: https://example.com
@@ -75,7 +75,7 @@ jobs:
     if: github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
     steps:
-      - uses: ABradwell/llm-ready-action@v1
+      - uses: aiden-buckstone/citara-github-action@v1
         with:
           api-key: ${{ secrets.LLMSEO_API_KEY }}
           url: ${{ github.event.deployment_status.target_url }}
